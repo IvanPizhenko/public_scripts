@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+  echo "Missing file or directory path" 1>&2
+  exit 1
+fi
+
+tar cvf "$1.tar" "$1"
+_x=$?
+if [ $_x -ne 0 ]; then
+  exit $_x
+fi
+
+gzip -v9 "$1.tar"
+exit $?
