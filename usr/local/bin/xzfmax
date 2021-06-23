@@ -5,11 +5,13 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-tar cvf "$1.tar" "$1"
+tarname="${1%/}.tar"
+
+tar cvf "$tarname" "$1"
 _x=$?
 if [ $_x -ne 0 ]; then
   exit $_x
 fi
 
-xz -v9e -T`nproc` "$1.tar"
+xz -v9e -T`nproc` "$tarname"
 exit $?
